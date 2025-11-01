@@ -1,0 +1,73 @@
+<IfModule mod_proxy.c>
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:8080/
+    ProxyPassReverse / http://localhost:8080/
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/\.well-known/
+    RewriteRule ^(.*)$ http://localhost:8080/$1 [P]
+</IfModule>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit 5000M
+   php_value post_max_size 8M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php81"
+   php_value upload_max_filesize 2M
+   php_flag zlib.output_compression Off
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors Off
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit 5000M
+   php_value post_max_size 8M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path "/var/cpanel/php/sessions/ea-php81"
+   php_value upload_max_filesize 2M
+   php_flag zlib.output_compression Off
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
+
+
+RewriteEngine On
+
+# Redirect policy pages to /legal
+Redirect 301 /policy /legal
+Redirect 301 /policy/refund /legal
+Redirect 301 /policy/terms /legal
+Redirect 301 /policy/privacy /legal
+
+
+# Redirect RDP-by-location plans to corresponding private RDP URLs
+Redirect 301 /rdp-by-location-plan /private-rdp
+Redirect 301 /rdp-by-location-plan/miami-private-rdp /private-rdp/miami-private-rdp
+Redirect 301 /rdp-by-location-plan/amazon-mturk-rdp /private-rdp/amazon-mturk-rdp
+Redirect 301 /rdp-by-location-plan/newyork-ryzen-rdp /private-rdp/newyork-ryzen-rdp
+Redirect 301 /rdp-by-location-plan/dallas-ryzen-rdp /private-rdp/dallas-ryzen-rdp
+Redirect 301 /rdp-by-location-plan/singapore-ryzen-rdp /private-rdp/singapore-ryzen-rdp
+Redirect 301 /rdp-by-location-plan/germany-ryzen-rdp /private-rdp/germany-ryzen-rdp
+Redirect 301 /rdp-by-location-plan/netherlands-ryzen-rdp /private-rdp/netherlands-ryzen-rdp
+Redirect 301 /rdp-by-location-plan/uk-ryzen-rdp /private-rdp/uk-ryzen-rdp
+Redirect 301 /rdp-by-location-plan/cheap-uk-rdp /private-rdp/p/cheap-uk-rdp
+Redirect 301 /rdp-by-location-plan/residential-rdp /private-rdp/residential-rdp
+Redirect 301 /rdp-by-location-plan/buy-dating-rdp /private-rdp/buy-dating-rdp
+Redirect 301 /rdp-by-location-plan/usa-rdp /private-rdp/usa-rdp
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Set the “ea-php82” package as the default “PHP” programming language.
+<IfModule mime_module>
+  AddHandler application/x-httpd-ea-php82 .php .php8 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit
