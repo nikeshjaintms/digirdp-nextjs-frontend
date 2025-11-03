@@ -774,7 +774,8 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </li><li
+                                        </li>
+                                        <li
                                             className="with-megamenu has-menu-child-item"
                                             ref={dropdownRef}
                                             onMouseEnter={() => setIsHostingMenuOpen(true)}
@@ -887,6 +888,11 @@ const Header = () => {
                                                 <li>
                                                     <Link href={`/knowledgebase`}>
                                                         <span>Knowledgebase</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href={`/faqs`}>
+                                                        <span>FAQs</span>
                                                     </Link>
                                                 </li>
                                                 <li>

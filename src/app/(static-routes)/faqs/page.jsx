@@ -12,7 +12,7 @@ import Head from "next/head";
 
 const assets = "/assets";
 
-function KnowledgeBase() {
+function Faqs() {
   const [faqs, setFaqs] = useState([]);
   const [faqs_category, setFaqs_category] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -36,20 +36,20 @@ function KnowledgeBase() {
     fetchFaqs();
   }, []);
 
-  // const [activeCategory, setActiveCategory] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(null);
 
-  // const [activeFAQ, setActiveFAQ] = useState({});
+  const [activeFAQ, setActiveFAQ] = useState({});
 
-  // const toggleFAQ = (categoryId, faqId) => {
-  //   setActiveFAQ((prevState) => ({
-  //     ...prevState,
-  //     [categoryId]: prevState[categoryId] === faqId ? null : faqId,
-  //   }));
-  // };
+  const toggleFAQ = (categoryId, faqId) => {
+    setActiveFAQ((prevState) => ({
+      ...prevState,
+      [categoryId]: prevState[categoryId] === faqId ? null : faqId,
+    }));
+  };
 
-  // const toggleCategory = (categoryId) => {
-  //   setActiveCategory((prev) => (prev === categoryId ? null : categoryId));
-  // };
+  const toggleCategory = (categoryId) => {
+    setActiveCategory((prev) => (prev === categoryId ? null : categoryId));
+  };
 
   return (
     <Fragment>
@@ -62,7 +62,7 @@ function KnowledgeBase() {
             <div className="row">
               <div className="col-lg-12">
                 <div className="breadcrumb-inner text-center">
-                  <h1 className="title h3">Knowledge Base</h1>
+                  <h1 className="title h3">FAQs</h1>
                   <ul className="page-list my-4">
                     <li className="rainbow-breadcrumb-item">
                       <Link href="/">Home</Link>
@@ -71,7 +71,7 @@ function KnowledgeBase() {
                       <Link href="/">Support</Link>
                     </li>
                     <li className="rainbow-breadcrumb-item active">
-                      Knowledge base
+                      FAQs
                     </li>
                   </ul>
                   <p className="description b1">
@@ -88,28 +88,92 @@ function KnowledgeBase() {
         <div className="rainbow-pricing-area rainbow-section-gap">
           <div className="container-fluid">
 
-            {/* <!-- Start Features Area --> */}
-            <div className="rainbow-testimonial-area rainbow-section-gap">
+            {/* <!-- Start RDP FAQs Area --> */}
+            <div className="rainbow-accordion-area rainbow-section-gap">
               <div className="container">
-                <div className="row custom-wrapper">
-                  <div className="col-lg-12">
-                    <div
-                      className="section-title text-center sal-animate"
-                      data-sal-duration="400"
-                      data-sal-delay="150"
-                    >
-                      <h4 className="subtitle">
-                        <span className="theme-gradient"></span>
-                      </h4>
-                      <h2 className="title w-600 mb--20">
-                        Custom Code section{" "}
-                      </h2>
-                      <p>
-                        add your custom code.{" "}
-                      </p>
+                {faqs_category.map((category) => (
+                  <div key={category.category_id} className="row">
+                    <div className="col-lg-12">
+                      <div
+                        className="section-title text-center"
+                        data-sal-duration="400"
+                        data-sal-delay="150"
+                      >
+                        <h4 className="subtitle">
+                          <span className="theme-gradient"></span>
+                        </h4>
+                        <h2 className="title w-600 mb--20">
+                          {category.category_name}
+                        </h2>
+                        <p>Let's see if we can help.</p>
+                      </div>
+                    </div>
+                    <div className="col-lg-12 col-xl-12 col-12 has-show-more">
+                      <div
+                        className="rainbow-accordion-style rainbow-accordion-02 has-show-more-inner-content has-show-more-inner-content-new large-height"
+                        id={`accordion-${category.category_id}`}
+                      >
+                        <div
+                          className="accordion"
+                          id={`accordionExample-${category.category_id}`}
+                        >
+                          {faqs
+                            .filter(
+                              (faq) => faq.category_id === category.category_id
+                            )
+                            .map((faq, index) => {
+                              const isActive =
+                                activeFAQ[category.category_id] === faq.id;
+                              const isFirst = index === 0; // Check if it's the first FAQ in the category
+
+                              return (
+                                <div
+                                  className="accordion-item card"
+                                  key={faq.id}
+                                >
+                                  <h2
+                                    className={`accordion-header card-header ${
+                                      isActive ? "text-purple" : ""
+                                    }`}
+                                    id={`heading-${faq.id}`}
+                                  >
+                                    <button
+                                      className={`accordion-button ${
+                                        isActive ? "" : "collapsed"
+                                      }`}
+                                      type="button"
+                                      onClick={() =>
+                                        toggleFAQ(category.category_id, faq.id)
+                                      }
+                                      aria-expanded={
+                                        isFirst || isActive ? "true" : "false"
+                                      }
+                                      aria-controls={`collapse-${faq.id}`}
+                                    >
+                                      {faq.question}
+                                    </button>
+                                  </h2>
+                                  <div
+                                    id={`collapse-${faq.id}`}
+                                    className={`accordion-collapse collapse ${
+                                      isActive ? "show" : ""
+                                    }`}
+                                    aria-labelledby={`heading-${faq.id}`}
+                                    data-bs-parent={`#accordion-${category.category_id}`}
+                                  >
+                                    <div className="accordion-body card-body">
+                                      {faq.answer}
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                      <div className="rbt-show-more-btn">Show More</div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -348,4 +412,4 @@ function KnowledgeBase() {
   );
 }
 
-export default KnowledgeBase;
+export default Faqs;

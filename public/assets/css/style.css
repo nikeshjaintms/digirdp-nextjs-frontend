@@ -354,6 +354,7 @@ img {
   vertical-align: middle;
   max-width: 100%;
   height: auto;
+  object-fit: cover;
 }
 
 svg:not(:root) {
@@ -20718,8 +20719,10 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 }
 
 .rainbow-card .inner .thumbnail a img {
-  width: 100%;
+ width: 100%;
   height: 18em;
+  object-fit: cover;      /* keeps image proportions */
+  object-position: center; /* centers the image */
   transition: 0.5s;
   overflow: hidden;
 }
@@ -21120,6 +21123,8 @@ only screen and (min-width: 768px) and (max-width: 991px) {
   margin-right: 10px;
   width: 120px;
   height: 85px;
+  object-fit: cover;
+  object-position: center; 
 }
 
 .rbt-single-widget.widget_recent_comments>ul>li,
@@ -21231,7 +21236,7 @@ only screen and (min-width: 768px) and (max-width: 991px) {
     Blog Details 
 ----------------------------------*/
 .rainbow-blog-details-area {
-  padding: 40px 20px !important;
+  padding: 40px 0 !important;
   background: var(--color-blackest);
   border-radius: var(--radius);
 }
@@ -21324,6 +21329,7 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 ------------------------*/
 .logo a img {
   max-height: 35px;
+  object-fit: cover;
 }
 
 .footer-style-1 {
@@ -21888,6 +21894,7 @@ only screen and (min-width: 768px) and (max-width: 991px) {
 
 .frame-image img {
   width: 100%;
+  object-fit: cover;
 }
 
 .frame-image:hover {
@@ -21921,6 +21928,7 @@ only screen and (min-width: 768px) and (max-width: 991px) {
   height: 72px;
   border-radius: 50%;
   overflow: hidden;
+  object-fit: cover;
 }
 
 .frame-image.frame-image-author .author .author-badge {
@@ -22247,6 +22255,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 
 .slider-style-1.variation-2 .thumbnail img {
   transform: scale(1.1);
+  object-fit: cover;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
@@ -23025,6 +23034,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 
 .slider-bg-image.bg-banner1 {
   background-image: url(../images/bg/main-banner-bg.png);
+  /* background-image: url("../images/light/bg/main-banner-bg.png"); */
   background-size: unset;
 }
 
@@ -23148,6 +23158,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 .slider-area .img-crt-area {
   padding-top: 120px;
   padding-bottom: 50px;
+  
 }
 
 @media only screen and (max-width: 767px) {
@@ -23261,6 +23272,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 .single-demo .thumbnail img {
   border-radius: 10px;
   width: 100%;
+  object-fit: cover;
 }
 
 .single-demo .thumbnail .image-light {
@@ -23301,6 +23313,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 
 .react-image img {
   max-height: 150px;
+  object-fit: cover;
 }
 
 /* Advance Tab Style Four  */
@@ -23415,6 +23428,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 .rainbow-collobration-area .collabration-image-section .logo-section .center-logo img {
   max-width: 90%;
   height: auto;
+  object-fit: cover;
 }
 
 /**************************************
@@ -23484,6 +23498,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
   width: 35px;
   height: auto;
   margin-right: 10px;
+  object-fit: cover;
 }
 
 .rbt-course-details-list-wrapper li span,
@@ -23593,6 +23608,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
   position: relative;
   overflow: hidden;
   margin-right: 10px;
+  object-fit: cover;
 }
 
 .subscription-box .inner .autor-info .author-img.active::after {
@@ -23880,15 +23896,18 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 .chat-content .img-box {
   position: relative;
   max-width: 250px;
+  object-fit: cover;
 }
 
 .chat-content .img-box.xl-size {
   max-width: 522px;
+  object-fit: cover;
 }
 
 .chat-content .img-box .download-btn {
   right: 20px;
   top: 20px;
+  object-fit: cover;
 }
 
 @media only screen and (max-width: 479px) {
@@ -29714,7 +29733,7 @@ tr {
 }
 .btn-blog{
   display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     padding-bottom: 20px;
 }
 
@@ -30503,4 +30522,8 @@ tr {
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .custom-wrapper{
+          background-color: var(--color-strock) !important;
+          border-radius: 20px;
         }

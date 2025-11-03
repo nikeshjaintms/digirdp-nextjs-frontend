@@ -331,8 +331,7 @@ const HomePage = () => {
                     </span>
                   </span>
                   <br />
-                </h1>
-                <h1 className="title display-one">designed for top-tier performance.</h1>
+                designed for top-tier performance.</h1>
                 <p className="description">
                   Get RDP & Cloud VPS So Fast, You’ll Wonder If It’s Magic –
                   Spoiler: It’s Not{" "}
