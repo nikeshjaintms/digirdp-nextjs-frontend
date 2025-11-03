@@ -59,6 +59,7 @@ async function getBlogs() {
 export async function generateMetadata({ params }) {
   const { slug } = await params; // Access the dynamic route parameter
   const blog = await getBlogData(slug); // Fetch blog data
+  const canonicalUrl = slug ? `/blog/${slug}` : "/blog";
 
   if (!blog) {
     return {
@@ -85,6 +86,17 @@ export async function generateMetadata({ params }) {
         },
       ],
     },
+    metadataBase: new URL("https://digirdp.com"),
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+      },
+      },
   };
 }
 

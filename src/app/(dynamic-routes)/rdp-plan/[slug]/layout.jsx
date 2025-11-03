@@ -30,7 +30,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: rdp?.title || "RDP VPS Server",
-    description: rdp?.meta_description || "RDP VPS Server Description",
+    description: rdp?.meta_description || rdp?.description || "RDP VPS Server Description",
     keywords: rdp?.keyword || "",
     alternates: {
       canonical: cononicalUrl,
@@ -50,6 +50,17 @@ export async function generateMetadata({ params }) {
           locale: "en_US",
           type: "website",
         },
+         metadataBase: new URL("https://digirdp.com"),
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+      },
+      },
   };
 }
 

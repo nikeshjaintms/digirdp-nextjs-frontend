@@ -28,14 +28,14 @@ export async function generateMetadata({ params }) {
 
   return {
     title: cloudvps.title || "Cloud VPS Server",
-    description: cloudvps.meta_description || "Cloud VPS Server Description",
+    description: cloudvps.meta_description || cloudvps.description || "Cloud VPS Server Description",
     keywords: cloudvps?.keyword || "",
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: cloudvps?.og_title || "Cloud VPS Server", // Assuming cloudvps might have og_title
-      description: cloudvps?.og_description || "Web Hosting VPS Server Description", // Assuming rdp might have og_description
+      title: cloudvps?.title || "Cloud VPS Server", // Assuming cloudvps might have og_title
+      description: cloudvps?.meta_description || cloudvps.description || "Web Hosting VPS Server Description", // Assuming rdp might have og_description
       url: `https://digirdp.com${canonicalUrl}`, // Use the dynamic canonical URL here
       siteName: "DigiRDP",
       images: [
