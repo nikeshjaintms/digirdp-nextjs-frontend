@@ -141,11 +141,7 @@ export default async function BlogDetails({ params }) {
             {/* <!-- Start Blog Area  --> */}
             <div className="rainbow-blog-section bg-color-1 ">
               <div className="container container-new">
-                <div className="header-btn btn-blog">
-                  <Link className="btn-top-blog  @@btnclassName" href="/blog">
-                    <i className="fa fa-arrow-left"></i> Back to blog
-                  </Link>
-                </div>
+                
 
                 <div className="row row--30">
                   <div className="col-lg-8">
@@ -265,6 +261,11 @@ export default async function BlogDetails({ params }) {
                       </div>
                     </aside>
                   </div>
+                </div>
+                <div className="header-btn btn-blog mt-4 text-start">
+                  <Link className="btn-top-blog  @@btnclassName" href="/blog">
+                    <i className="fa fa-arrow-left"></i> Back to blog
+                  </Link>
                 </div>
               </div>
             </div>

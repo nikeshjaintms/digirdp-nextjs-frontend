@@ -10,24 +10,24 @@ const ThemeSwitcher = () => {
   const initialTheme = Cookies.get("theme") || "dark";
   const [theme, setTheme] = useState(initialTheme);
 
-  useEffect(() => {
-    // Update the body class based on the selected theme
-    if (theme === "dark") {
-      document.body.classList.add("active-dark-mode");
-      document.body.classList.remove("active-light-mode");
-    } else {
-      document.body.classList.add("active-light-mode");
-      document.body.classList.remove("active-dark-mode");
-    }
+    useEffect(() => {
+      // Update the body class based on the selected theme
+      if (theme === "dark") {
+        document.body.classList.add("active-dark-mode");
+        document.body.classList.remove("active-light-mode");
+      } else {
+        document.body.classList.add("active-light-mode");
+        document.body.classList.remove("active-dark-mode");
+      }
 
-    // Persist the theme in a cookie for future visits
-    Cookies.set("theme", theme, { expires: 7 });
-  }, [theme]); // Run the effect when the theme changes
+      // Persist the theme in a cookie for future visits
+      Cookies.set("theme", theme, { expires: 7 });
+    }, [theme]); // Run the effect when the theme changes
 
-  const switchTheme = (newTheme, event) => {
-    event.preventDefault(); // Prevent default link navigation
-    setTheme(newTheme);
-  };
+    const switchTheme = (newTheme, event) => {
+      event.preventDefault(); // Prevent default link navigation
+      setTheme(newTheme);
+    };
 
   return (
    <div id="my_switcher" className="my_switcher">

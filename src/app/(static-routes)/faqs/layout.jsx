@@ -1,7 +1,7 @@
 // Type Imports
 
 export const metadata = {
-  title: "Knowledge Base || Digi RDP",
+  title: "FAQs || Digi RDP",
   description: "Here are some answers to some commonly asked questions",
 };
 
