@@ -26,7 +26,7 @@ const fetchData = async (slug) => {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const { rdp } = await fetchData(slug);
-   const canonicalUrl = slug ? `/web-hosting/${slug}` : "/web-hosting"; 
+   const canonicalUrl = slug ? `/hosting/${slug}` : "/hosting"; 
 
   return {
     title: rdp?.title || "Web Hosting VPS Server",
@@ -42,7 +42,7 @@ export async function generateMetadata({ params }) {
       siteName: "DigiRDP",
       images: [
         {
-          url: rdp?.og_image || "/og-image.jpg", // Assuming rdp might have og_image
+          url: process.env.NEXT_PUBLIC_BACKEND_IMAGE_URL +'/' + rdp?.logo || "/og-image.jpg", // Assuming rdp might have og_image
           width: 1200,
           height: 630,
         },
