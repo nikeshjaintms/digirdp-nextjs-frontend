@@ -847,50 +847,6 @@ const RDPPlan = () => {
                               </div>
                             </div>
                           ))}
-                          {/* <div className="accordion-item card">
-                                                    <h2 className="accordion-header card-header" id="headingSix">
-                                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                                                            What are the benefits of using Canada Admin RDP?
-                                                        </button>
-                                                    </h2>
-                                                    <div id="collapseSix" className="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExampleb">
-                                                        <div className="accordion-body card-body">
-                                                            Some of the key benefits include: <br /> • High-speed connectivity and low latency for users in North America. <br /> • Enhanced security features to protect your data and operations. <br /> • Full administrative access to install software, manage settings, and configure the server as per your requirements. <br /> • 24/7 customer support to assist with any technical issues. <br /> • Scalable resources to meet your growing needs.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className="accordion-item card">
-                                                    <h2 className="accordion-header card-header" id="headingSeven">
-                                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">Who can benefit from Canada Admin RDP?</button>
-                                                    </h2>
-                                                    <div id="collapseSeven" className="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExampleb">
-                                                        <div className="accordion-body card-body">Canada Admin RDP is beneficial for: <br /> • Businesses looking to manage their IT infrastructure remotely. <br /> • Freelancers and remote workers need a secure and powerful server. <br /> • Developers and IT professionals require a robust environment for testing and deployment. <br /> • Companies need a reliable server for hosting applications and websites.</div>
-                                                    </div>
-                                                </div>
-                                                <div className="accordion-item card">
-                                                    <h2 className="accordion-header card-header" id="headingEight">
-                                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">How do I get started with Canada Admin RDP?</button>
-                                                    </h2>
-                                                    <div id="collapseEight" className="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#accordionExampleb">
-                                                        <div className="accordion-body card-body">Getting started is easy. Visit the DigiRDP website, select the Canada Admin RDP plan that best suits your needs, complete the purchase process, and you will receive your login credentials via email. Our support team is available to assist you with the setup if needed.</div>
-                                                    </div>
-                                                </div>
-                                                <div className="accordion-item card">
-                                                    <h2 className="accordion-header card-header" id="headingNine">
-                                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">What security measures are in place for Canada Admin RDP?</button>
-                                                    </h2>
-                                                    <div id="collapseNine" className="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#accordionExampleb">
-                                                        <div className="accordion-body card-body">DigiRDP implements several security measures, including: <br /> • Strong encryption protocols to protect data transmission. <br /> • Regular security updates and patches. • Firewall protection to prevent unauthorized access. <br /> • DDoS protection to ensure server availability. <br /> • Regular backups to safeguard your data.</div>
-                                                    </div>
-                                                </div>
-                                                <div className="accordion-item card">
-                                                    <h2 className="accordion-header card-header" id="headingTen">
-                                                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">Can I upgrade or downgrade my Canada Admin RDP plan?</button>
-                                                    </h2>
-                                                    <div id="collapseTen" className="accordion-collapse collapse" aria-labelledby="headingTen" data-bs-parent="#accordionExampleb">
-                                                        <div className="accordion-body card-body">Yes, DigiRDP offers flexible plans that can be easily upgraded or downgraded based on your requirements. You can contact our support team to assist with the process.</div>
-                                                    </div>
-                                                </div> */}
                         </div>
                       </div>
                     </div>
