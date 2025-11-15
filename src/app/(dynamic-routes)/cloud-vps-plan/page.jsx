@@ -7,6 +7,7 @@ import BlogSlider from "@/pages/slider/BlogSlider";
 import Location from "@/pages/sales-page/Location";
 import Link from "next/link";
 import axios from "axios";
+import Head from "next/head";
 const assets = "/assets";
 
 const Cloud = () => {

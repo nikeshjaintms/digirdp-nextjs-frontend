@@ -6,6 +6,7 @@ import BlogSlider from "../../../../pages/slider/BlogSlider";
 import Testimonial from "../../../../pages/slider/testimonial";
 import Promo from "../../../../pages/slider/Promo";
 import Location from "../../../../pages/sales-page/Location";
+import BlogTOC from "../../../../components/BlogTOC";
 import Head from "next/head";
 import Link from "next/link";
 import axios from "axios";
@@ -197,11 +198,8 @@ export default async function BlogDetails({ params }) {
                                 <h2 className="title">
                                   {blog.title} Here’s How
                                 </h2>
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: blog.description,
-                                  }}
-                                />
+                                  <BlogTOC html={blog.description} />
+
                                 <h5 className="title">Author Description</h5>
                                 <div class="profile-card">
                                   <div class="profile-image">

@@ -13,6 +13,7 @@
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "grecaptcha": "^1.0.0",
+    "html-react-parser": "^5.2.8",
     "http-proxy-middleware": "^3.0.3",
     "install": "^0.13.0",
     "jquery": "^3.7.1",

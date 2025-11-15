@@ -15,7 +15,6 @@ const Header = () => {
     const [rdp_menu, set_Rdp_Menu] = useState([]);
     const [rdp_location, set_Rdp_location] = useState([]);
     const [dedicated, set_Dedicated] = useState([]);
-    const [config, set_config] = useState([]);
     const [topBanner, set_topBanner] = useState([]);
     const [logo, set_logo] = useState([]);
     const { setAnotherCurrency } = useCurrency();
@@ -51,16 +50,6 @@ const Header = () => {
             });
     }, []);
 
-    useEffect(() => {
-        axios
-            .get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/configurations`)
-            .then((response) => {
-                set_config(response.data);
-            })
-            .catch((error) => {
-                console.error("Error fetching RDP data:", error);
-            });
-    }, []);
 
     useEffect(() => {
         axios
@@ -446,22 +435,7 @@ const Header = () => {
     };
 
     //we set seo replaced by helmet (reactjs)
-    useEffect(() => {
-        // Set meta keywords dynamically
-        const metaKeywords = document.querySelector('meta[name="keywords"]');
-        if (metaKeywords) {
-            metaKeywords.setAttribute(
-                "content",
-                config?.keywords || "default, keywords"
-            );
-        } else {
-            const metaTag = document.createElement("meta");
-            metaTag.name = "keywords";
-            metaTag.content = config?.keywords || "default, keywords";
-            document.head.appendChild(metaTag);
-        }
-    }, [config]);
-
+    
     useEffect(() => {
         const fetchCurrencies = async () => {
             try {
@@ -491,16 +465,6 @@ const Header = () => {
     return (
         <>
             <Fragment>
-                <Head>
-                    {/* Google Analytics Script */}
-                    {config.code_box_header && (
-                        <script
-                            dangerouslySetInnerHTML={{ __html: config.code_box_header }}
-                        />
-                    )}
-                    {/* Meta description or keywords */}
-                    <meta name="keywords" content={config.keywords} />
-                </Head>
 
                 {/* <!-- Imroz Preloader --> */}
 

@@ -1,10 +1,13 @@
 "use client";
 import { CurrencyProvider } from "./CurrencyProvider";
+import { ConfigProvider } from "@/context/ConfigProvider";
 
 export default function Providers({ children }) {
   return (
-    <CurrencyProvider>
-      {children}
-    </CurrencyProvider>
+      <ConfigProvider>
+        <CurrencyProvider>
+          {children}
+        </CurrencyProvider>
+      </ConfigProvider>
   );
 }

@@ -11,6 +11,8 @@ import Location from "../../../pages/sales-page/Location";
 const assets = "/assets";
 import BlogSkeleton from "../../../components/BlogSkeleton";
 import "../../styles/skeleton.css";
+import Head from "next/head"
+
 
 function Blog() {
   const [loading, setLoading] = useState(true);
