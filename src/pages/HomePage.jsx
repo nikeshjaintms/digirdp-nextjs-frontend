@@ -1,6 +1,7 @@
 "use client";
 import React, { Fragment, useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import Head from "next/head"
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BlogSkeleton from "@/components/BlogSkeleton";
@@ -11,7 +12,6 @@ import "slick-carousel/slick/slick-theme.css";
 import sal from "sal.js";
 import "sal.js/dist/sal.css";
 import BlogSlider from "./slider/BlogSlider";
-
 import FeatureSlider from "./slider/FeatureSlider";
 import Location from "../pages/sales-page/Location";
 import Categories from "./slider/Categories";
@@ -19,6 +19,7 @@ import axios from "axios";
 const assets = "/assets";
 import { convertCurrency } from "../utils/currencyUtils";
 import { useCurrency } from "@/context/CurrencyProvider";
+import { useConfig  } from "@/context/ConfigProvider"
 import $ from "jquery";
 
 const HomePage = () => {
@@ -30,6 +31,7 @@ const HomePage = () => {
   const [cloudvps, setCloudVPS] = useState([]);
   const [dedicated, setdedicated] = useState([]);
   const { currency } = useCurrency();
+  const { config } = useConfig();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -304,8 +306,23 @@ const HomePage = () => {
     }
   };
 
+  console.log("config ",config)
+
   return (
     <Fragment>
+            <Head>
+                {/* Load header script only when config exists */}
+                {config?.code_box_header && (
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: config.code_box_header,
+                        }}
+                    />
+                )}
+
+                {/* Keywords (fallback to empty string to avoid errors) */}
+                <meta name="keywords" content={config?.keywords ?? ""} />
+            </Head>
       <Header />
 
       {/* <div className="max-w-[1360px] mx-auto"> */}

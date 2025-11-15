@@ -6,6 +6,7 @@ import BlogSlider from "../../../../pages/slider/BlogSlider";
 import Testimonial from "../../../../pages/slider/testimonial";
 import Promo from "../../../../pages/slider/Promo";
 import Location from "../../../../pages/sales-page/Location";
+import BlogTOC from "../../../../components/BlogTOC";
 import Head from "next/head";
 import Link from "next/link";
 import axios from "axios";
@@ -290,46 +291,8 @@ export default async function BlogDetails({ params }) {
                                 <h2 className="title">
                                   {blog.title} Here’s How
                                 </h2>
-                                <div
-                                  dangerouslySetInnerHTML={{__html: blog.description}}
-                                />
-                                <br />
-                                <br />
-                                <div className="rainbow-accordion-style rainbow-accordion-02 accordion">
-                                  <div className="accordion" id="accordionExampleb">
-                                    {blogFAQs.map((blogFAQ, index) => (
-                                      <div key={index} className="accordion-item card">
-                                        <h2
-                                          className="accordion-header card-header"
-                                          id={`heading-${blogFAQ.id}`}
-                                        >
-                                          <button
-                                            className="accordion-button collapsed"
-                                            type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target={`#collapse-${blogFAQ.id}`}
-                                            aria-expanded="false"
-                                            aria-controls={`collapse-${blogFAQ.id}`}
-                                          >
-                                            {blogFAQ.question}
-                                          </button>
-                                        </h2>
-                                        <div
-                                          id={`collapse-${blogFAQ.id}`}
-                                          className="accordion-collapse collapse"
-                                          aria-labelledby={`heading-${blogFAQ.id}`}
-                                          data-bs-parent="#accordionExampleb"
-                                        >
-                                          <div className="accordion-body card-body">
-                                            {blogFAQ.answer}
-                                          </div>
-                                        </div>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                                <br />
-                                <br />
+                                  <BlogTOC html={blog.description} />
+
                                 <h5 className="title">Author Description</h5>
                                 <div class="profile-card">
                                   <div class="profile-image">
