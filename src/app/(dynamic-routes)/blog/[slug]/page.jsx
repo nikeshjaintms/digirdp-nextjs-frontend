@@ -32,35 +32,36 @@ async function getBlogData(slug) {
     }
 
     const data = await response.json();
-    return data[0][0]; // Return the first blog object
+    
+    return data[0]; // Return the first blog object
   } catch (error) {
     console.error("Error fetching blog data:", error);
     return null;
   }
 }
 
-async function getBlogFAQData(slug) {
-  try {
-    // If you want to use Static Generation (SSG) instead of SSR, you can replace cache: 'no-store' with next: { revalidate: 3600 } to revalidate the data every hour.
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/blog/${slug}`,
-      {
-        // cache: 'no-store', // Ensure fresh data on every request (SSR)
-        next: { revalidate: 3600 },
-      }
-    );
+// async function getBlogFAQData(slug) {
+//   try {
+//     // If you want to use Static Generation (SSG) instead of SSR, you can replace cache: 'no-store' with next: { revalidate: 3600 } to revalidate the data every hour.
+//     const response = await fetch(
+//       `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/blog/${slug}`,
+//       {
+//         // cache: 'no-store', // Ensure fresh data on every request (SSR)
+//         next: { revalidate: 3600 },
+//       }
+//     );
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch blog data");
-    }
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch blog data");
+//     }
 
-    const data = await response.json();
-    return data[1]; // Return the first blog object
-  } catch (error) {
-    console.error("Error fetching blog data:", error);
-    return null;
-  }
-}
+//     const data = await response.json();
+//     return data[1]; // Return the first blog object
+//   } catch (error) {
+//     console.error("Error fetching blog data:", error);
+//     return null;
+//   }
+// }
 
 async function getBlogs() {
   try {
@@ -79,65 +80,65 @@ async function getBlogs() {
   }
 }
 // 1. FAQPage Schema Generator
-function generateFaqSchema(faqs) {
-    if (!faqs || faqs.length === 0) return null;
+// function generateFaqSchema(faqs) {
+//     if (!faqs || faqs.length === 0) return null;
 
-    const mainEntity = faqs.map(faq => ({
-        "@type": "Question",
-        "name": faq.question,
-        "acceptedAnswer": {
-            "@type": "Answer",
-            "text": faq.answer.replace(/<[^>]*>?/gm, ''), // Basic HTML stripping for cleaner schema
-        },
-    }));
+//     const mainEntity = faqs.map(faq => ({
+//         "@type": "Question",
+//         "name": faq.question,
+//         "acceptedAnswer": {
+//             "@type": "Answer",
+//             "text": faq.answer.replace(/<[^>]*>?/gm, ''), // Basic HTML stripping for cleaner schema
+//         },
+//     }));
 
-    const faqSchema = {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": mainEntity,
-    };
+//     const faqSchema = {
+//         "@context": "https://schema.org",
+//         "@type": "FAQPage",
+//         "mainEntity": mainEntity,
+//     };
 
-    return faqSchema;
-}
+//     return faqSchema;
+// }
 
 // 2. Article/BlogPosting Schema Generator
-function generateArticleSchema(blog, slug) {
-    const articleSchema = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting", // Use BlogPosting for specific blog articles
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": `/blog/${slug}`
-        },
-        "headline": blog.title,
-        "image": [
-            process.env.NEXT_PUBLIC_BACKEND_IMAGE_URL + '/' + blog.feature_image || `${SITE_URL}${assets}/images/added/big-one.png`
-        ],
-        "datePublished": new Date(blog.created_at).toISOString(),
-        "dateModified": new Date(blog.updated_at || blog.created_at).toISOString(),
-        "author": {
-            "@type": "Person",
-            "name": blog.user_name,
-            "url": `/about-us` // Link to author's profile or company page
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "DigiRDP",
-            "logo": {
-                "@type": "ImageObject",
-                "url": `${assets}/images/logo.png` // Replace with actual logo URL
-            }
-        },
-        "description": blog.meta_descriptions,
-    };
-    return articleSchema;
-}
+// function generateArticleSchema(blog, slug) {
+//     const articleSchema = {
+//         "@context": "https://schema.org",
+//         "@type": "BlogPosting", // Use BlogPosting for specific blog articles
+//         "mainEntityOfPage": {
+//             "@type": "WebPage",
+//             "@id": `/blog/${slug}`
+//         },
+//         "headline": blog.title,
+//         "image": [
+//             process.env.NEXT_PUBLIC_BACKEND_IMAGE_URL + '/' + blog.feature_image || `${SITE_URL}${assets}/images/added/big-one.png`
+//         ],
+//         "datePublished": new Date(blog.created_at).toISOString(),
+//         "dateModified": new Date(blog.updated_at || blog.created_at).toISOString(),
+//         "author": {
+//             "@type": "Person",
+//             "name": blog.user_name,
+//             "url": `/about-us` // Link to author's profile or company page
+//         },
+//         "publisher": {
+//             "@type": "Organization",
+//             "name": "DigiRDP",
+//             "logo": {
+//                 "@type": "ImageObject",
+//                 "url": `${assets}/images/logo.png` // Replace with actual logo URL
+//             }
+//         },
+//         "description": blog.meta_descriptions,
+//     };
+//     return articleSchema;
+// }
 // Generate SEO metadata dynamically
 export async function generateMetadata({ params }) {
   const { slug } = await params; // Access the dynamic route parameter
   const blog = await getBlogData(slug); // Fetch blog data
   const canonicalUrl = slug ? `/blog/${slug}` : "/blog";
-  const blogFAQs = await getBlogFAQData(slug); // Fetch blog FAQ data on the server
+  // const blogFAQs = await getBlogFAQData(slug); // Fetch blog FAQ data on the server
 
 
   if (!blog) {
@@ -146,14 +147,14 @@ export async function generateMetadata({ params }) {
       description: "The blog you are looking for does not exist.",
     };
   }
-  const faqSchema = generateFaqSchema(blogFAQs);
-    const articleSchema = generateArticleSchema(blog, slug);
+  // const faqSchema = generateFaqSchema(blogFAQs);
+  //   const articleSchema = generateArticleSchema(blog, slug);
     
     // Combine all schemas into a single array for Next.js
-    const structuredData = [articleSchema];
-    if (faqSchema) {
-        structuredData.push(faqSchema);
-    }
+    // const structuredData = [articleSchema];
+    // if (faqSchema) {
+    //     structuredData.push(faqSchema);
+    // }
 
   return {
     title:
@@ -163,7 +164,7 @@ export async function generateMetadata({ params }) {
       blog.meta_descriptions || "Read our latest blog posts on DigiRDP.",
     keywords: blog.meta_keywords || "RDP, VPS, Cloud",
     // Use 'application/ld+json' key for automatic schema injection
-        'application/ld+json': structuredData,
+        // 'application/ld+json': structuredData,
     openGraph: {
       title: blog.meta_title,
       description: blog.meta_descriptions,
@@ -189,7 +190,7 @@ export async function generateMetadata({ params }) {
       alternates: {
             canonical: canonicalUrl,
         },
-      'application/ld+json': structuredData,
+      // 'application/ld+json': structuredData,
   };
 }
 
@@ -197,7 +198,9 @@ export async function generateMetadata({ params }) {
 export default async function BlogDetails({ params }) {
   const { slug } = await params; // Access the dynamic route parameter
   const blog = await getBlogData(slug); // Fetch blog data on the server
-  const blogFAQs = await getBlogFAQData(slug); // Fetch blog FAQ data on the server
+  // const blogFAQs = await getBlogFAQData(slug); // Fetch blog FAQ data on the server
+
+  console.log("Blog",blog);
 
   if (!blog) {
   notFound(); // Next.js built-in 404
@@ -294,8 +297,8 @@ export default async function BlogDetails({ params }) {
                                   <BlogTOC html={blog.description} />
 
                                 <h5 className="title">Author Description</h5>
-                                <div class="profile-card">
-                                  <div class="profile-image">
+                                <div className="profile-card">
+                                  <div className="profile-image">
                                     <img
                                       src={
                                         `${blog.user_profile_img}`
