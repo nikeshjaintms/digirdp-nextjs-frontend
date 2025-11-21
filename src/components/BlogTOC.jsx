@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import parse, { domToReact } from "html-react-parser";
 
 export default function BlogTOC({ html }) {
@@ -11,19 +11,22 @@ export default function BlogTOC({ html }) {
     const temp = document.createElement("div");
     temp.innerHTML = html;
 
-    const headings = [...temp.querySelectorAll("p strong")]
+    const headings = [...temp.querySelectorAll("p strong, h1, h2, h3, h4, h5, h6")]
       .map(tag => tag.innerText.trim())
       .filter(text => {
-        // RULE 1: Must start with uppercase
+        // Always include "Conclusion"
+        if (/conclusion/i.test(text)) return true;
+
+        // Must start uppercase
         if (!/^[A-Z]/.test(text)) return false;
 
-        // RULE 2: Must contain at least 3 words
-        if (text.split(" ").length < 1) return false;
+        // Must contain at least 2 words
+        if (text.split(" ").length < 2) return false;
 
-        // RULE 3: Must be longer than 25 chars
-        if (text.length < 5) return false;
+        // Must be at least 10 characters
+        if (text.length < 10) return false;
 
-        // RULE 4: Skip lines ending with a period (.)
+        // Skip sentences ending with a period
         if (text.endsWith(".")) return false;
 
         return true;
@@ -38,25 +41,41 @@ export default function BlogTOC({ html }) {
 
   let index = -1;
 
-  // PARSE HTML + inject IDs for headings
-  const contentWithIDs = parse(html, {
-    replace: (node) => {
-      if (
-        node.name === "p" &&
-        node.children &&
-        node.children[0]?.name === "strong"
-      ) {
-        // Identify this paragraph's text
-        const textContent = node.children[0]?.children?.[0]?.data?.trim() || "";
+  const getNodeText = (node) => {
+  if (!node) return "";
+  if (node.type === "text") return node.data;
+  if (!node.children) return "";
+  return node.children.map(getNodeText).join(" ").trim();
+};
 
-        // Apply SAME FILTER here to match TOC
-        if (
-          /^[A-Z]/.test(textContent) && // starts uppercase
-          textContent.split(" ").length >= 1 && // 3+ words
-          textContent.length >= 5 && // long enough
-          !textContent.endsWith(".") // not ending with period
-        ) {
-          index++;
+const contentWithIDs = parse(html, {
+  replace: (node) => {
+    if (
+      ["h1", "h2", "h3", "h4", "h5", "h6"].includes(node.name) ||
+      (node.name === "p" && node.children && node.children[0]?.name === "strong")
+    ) {
+      const textContent = getNodeText(node);
+
+      if (
+        /conclusion/i.test(textContent) ||
+        (
+          /^[A-Z]/.test(textContent) &&
+          textContent.split(" ").length >= 2 &&
+          textContent.length >= 10 &&
+          !textContent.endsWith(".")
+        )
+      ) {
+        index++;
+
+        if (["h1","h2","h3","h4","h5","h6"].includes(node.name)) {
+          return React.createElement(
+            node.name,
+            { id: `section-${index}`, style: { scrollMarginTop: "120px" } },
+            domToReact(node.children)
+          );
+        }
+
+          // For <p><strong>…</strong></p>
           return (
             <p id={`section-${index}`} style={{ scrollMarginTop: "120px" }}>
               {domToReact(node.children)}
@@ -68,28 +87,47 @@ export default function BlogTOC({ html }) {
   });
 
   return (
-    <div className="row">
-      {/* LEFT: TABLE OF CONTENT */}
-      <aside className="col-lg-4 col-12">
-        <h3>Table of Contents</h3>
+  <div className="row">
+      
+      {/* TOC */}
+      <div className="col-lg-12 col-12" 
+        style={{
+          background: "#ffffff",
+          border: "1px solid #cd99ff",
+          borderRadius: "10px",
+          padding: "22px",
+          marginBottom: "20px",
+          boxShadow: "1px 1px 5px #925fc375",
+          position: "sticky",
+          top: "120px",
+          height: "fit-content"
+        }}
+      >
+        <h3 style={{ borderBottom: "1px solid #cd99ff" }}>Table of Contents</h3>
+
         <ul style={{ listStyle: "none", padding: 0 }}>
           {toc.map((item) => (
-            <li key={item.id} style={{ marginBottom: "10px" }}>
+            <li
+              key={item.id}
+              className="list-group-item d-flex justify-content-between align-items-center"
+              style={{ marginBottom: "10px" }}
+            >
               <strong>
-                <a
-                  href={`#${item.id}`}
-                  style={{ color: "#333", textDecoration: "none" }}
-                >
+                <a href={`#${item.id}`} style={{ color: "#333", textDecoration: "none" }}>
                   {item.text}
                 </a>
               </strong>
+              <span style={{ fontSize: "30px", opacity: 0.5 }}>&#8250;</span>
             </li>
           ))}
         </ul>
-      </aside>
+      </div>
 
-      {/* RIGHT: CONTENT WITH IDs */}
-      <div className="col-lg-8 col-12">{contentWithIDs}</div>
-    </div>
-  );
+      {/* BLOG CONTENT */}
+      <div className="col-lg-12 col-md-7 col-12">
+        {contentWithIDs}
+      </div>
+
+  </div>
+);
 }
