@@ -18,10 +18,18 @@ const Header = () => {
     const [topBanner, set_topBanner] = useState([]);
     const [logo, set_logo] = useState([]);
     const { setAnotherCurrency } = useCurrency();
-    const [currencies, setCurrencies] = useState([]);const [hostingMenu, setHostingMenu] = useState([]);
+    const [currencies, setCurrencies] = useState([]);
+    
+    const [hostingMenu, setHostingMenu] = useState([]);
     const [hostings, setHostings] = useState([]);
     const [activeHostingTab, setActiveHostingTab] = useState("");
     const [isHostingMenuOpen, setIsHostingMenuOpen] = useState(false);
+
+   const [isVpsMenuOpen, setIsVpsMenuOpen] = useState(false);
+    const [activeVpsTab, setActiveVpsTab] = useState("");   
+    const [vpsMenu, setVpsMenu] = useState([]);          
+    const [vpsPlans, setVpsPlans] = useState([]);           
+
 
     //console.log({ currency });
     useEffect(() => {
@@ -69,16 +77,32 @@ const Header = () => {
     const rdpPerColumn = rdps.length / 2;
     const chunkedrdp = rdps.length > 0 ? chunk(rdps, rdpPerColumn) : [];
 
+    // useEffect(() => {
+    //     axios
+    //         .get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cloud_vps`)
+    //         .then((response) => {
+    //             set_Vps(response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error fetching VPS data:", error);
+    //         });
+    // }, []);
     useEffect(() => {
-        axios
-            .get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cloud_vps`)
-            .then((response) => {
-                set_Vps(response.data);
+        axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cloud_vps`)
+            .then((res) => {
+                setVpsPlans(res.data);
+
+                const uniqueTabs = [
+                    ...new Map(res.data.map(item => [item.menu_item_name, item])).values()
+                ];
+                setVpsMenu(uniqueTabs);
+
+                if (uniqueTabs.length > 0) setActiveVpsTab(uniqueTabs[0].menu_item_name);
             })
-            .catch((error) => {
-                console.error("Error fetching VPS data:", error);
-            });
+            .catch(err => console.error("VPS fetch error:", err));
     }, []);
+
+    
 
     const vpsPerColumn = v_p_s.length / 2;
     const chunkedVps = v_p_s.length > 0 ? chunk(v_p_s, vpsPerColumn) : [];
@@ -698,7 +722,7 @@ const Header = () => {
                                                 </div>
                                             </div>
                                         </li>
-                                        <li
+                                        {/* <li
                                             className={`with-megamenu has-menu-child-item ${isMenuOpen ? "active" : ""
                                                 }`}
                                             onMouseEnter={() => setIsMenuOpen(true)}
@@ -738,7 +762,70 @@ const Header = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </li> */}
+
+                                        <li className="with-megamenu has-menu-child-item"
+                                            onMouseEnter={() => setIsVpsMenuOpen(true)}
+                                            onMouseLeave={() => setIsVpsMenuOpen(false)}
+                                        >
+                                            <Link href="#" onClick={() => setIsVpsMenuOpen(!isVpsMenuOpen)}>
+                                                Cloud VPS
+                                            </Link>
+
+                                            {isVpsMenuOpen && vpsMenu.length > 0 && (
+                                                <div className="rainbow-megamenu rainbow-megamenu-new">
+                                                    <div className="wrapper wrapper-new">
+                                                        <div className="mega-menu-content">
+                                                            
+                                                            {/* TABS — SAME AS HOSTING */}
+                                                            <div className="tabsNew">
+                                                                {vpsMenu.map((tab, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className={`tabNew ${activeVpsTab === tab.menu_item_name ? "active" : ""}`}
+                                                                        onClick={() => setActiveVpsTab(tab.menu_item_name)}
+                                                                    >
+                                                                        {tab.menu_item_name}
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+
+                                                            {/* TAB CONTENT */}
+                                                            <div className="tab-content-new">
+                                                                {vpsMenu.map((tab, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        id={tab.menu_item_name}
+                                                                        className={`tab-pane-new ${activeVpsTab === tab.menu_item_name ? "active" : ""}`}
+                                                                    >
+                                                                        <div className="row">
+                                                                            {vpsPlans
+                                                                                .filter(vps => vps.menu_item_name === tab.menu_item_name)
+                                                                                .filter(vps => vps.show_in_header === 1)
+                                                                                .map((vps, idx) => (
+                                                                                    <div key={idx} className="col-lg-4">
+                                                                                        <ul className="mega-menu-item">
+                                                                                            <li>
+                                                                                                <Link href={`/cloud-vps-plan/${vps.url_text}`}>
+                                                                                                    <span>{vps.name}</span>
+                                                                                                </Link>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                ))}
+                                                                        </div>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
                                         </li>
+
+
+
                                         <li
                                             className="with-megamenu has-menu-child-item"
                                             ref={dropdownRef}
