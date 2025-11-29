@@ -378,7 +378,7 @@ const Hosting = () => {
                                                                                 </li>
                                                                                 <li>
                                                                                     <i className="fa-regular fa-circle-check"></i>{" "}
-                                                                                    {pkg.ram} 
+                                                                                    {pkg.ram}
                                                                                 </li>
                                                                                 <li>
                                                                                     <i className="fa-regular fa-circle-check"></i>{" "}
@@ -411,11 +411,11 @@ const Hosting = () => {
 
                                                                                 {/* Additional attributes a-e */}
                                                                                 <li>
-                                                                                    <i className="fa-regular fa-circle-check"></i> 
+                                                                                    <i className="fa-regular fa-circle-check"></i>
                                                                                     {pkg.a}
                                                                                 </li>
                                                                                 <li>
-                                                                                    <i className="fa-regular fa-circle-check"></i> 
+                                                                                    <i className="fa-regular fa-circle-check"></i>
                                                                                     {pkg.b}
                                                                                 </li>
                                                                                 <li>
@@ -448,10 +448,205 @@ const Hosting = () => {
                                                 ))}
                                         </div>
 
+                                       <div className="btn-btm"><a href="" className="compare-btn">Compare our plans</a></div>
+                                
+                                        
+
+
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <section className="compare-section" id="compare">
+                            <div className="container">
+                                <div className="text-center mb--40">
+                                    <h2 className="compare-title">Compare our plans</h2>
+                                    <p className="compare-subtitle">
+                                        See at a glance what each plan costs and what you get for your money.
+                                    </p>
+                                </div>
+
+                                <div className="compare-wrapper">
+                                    {/* ===== sticky header with 4 plans ===== */}
+                                    <div className="compare-header">
+                                        <div className="plan-col">
+                                            <h4>Single</h4>
+                                            <p className="price">₹ 69.00/mo</p>
+                                            <button className="btn-compare">Claim Deal</button>
+                                        </div>
+
+                                        <div className="plan-col plan-popular">
+                                            <span className="badge-popular">Popular</span>
+                                            <h4>Premium</h4>
+                                            <p className="price">₹ 129.00/mo</p>
+                                            <button className="btn-compare btn-primary">Claim Deal</button>
+                                        </div>
+
+                                        <div className="plan-col">
+                                            <h4>Business</h4>
+                                            <p className="price">₹ 199.00/mo</p>
+                                            <button className="btn-compare">Claim Deal</button>
+                                        </div>
+
+                                        <div className="plan-col">
+                                            <h4>Cloud Startup</h4>
+                                            <p className="price">₹ 549.00/mo</p>
+                                            <button className="btn-compare">Claim Deal</button>
+                                        </div>
+                                    </div>
+
+                                    {/* ===== accordion ===== */}
+                                    <div className="rainbow-accordion-style rainbow-accordion-02 accordion compare-accordion">
+                                        <div className="accordion" id="compareAccordion">
+
+                                            {/* item 1 – Top features */}
+                                            <div className="accordion-item card">
+                                                <h2 className="accordion-header card-header" id="heading-top-features">
+                                                    <button
+                                                        className="accordion-button"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#collapse-top-features"
+                                                        aria-expanded="true"
+                                                        aria-controls="collapse-top-features"
+                                                    >
+                                                        <span className="accordion-title">Top features</span>
+                                                    </button>
+                                                </h2>
+                                                <div
+                                                    id="collapse-top-features"
+                                                    className="accordion-collapse collapse show"
+                                                    aria-labelledby="heading-top-features"
+                                                    data-bs-parent="#compareAccordion"
+                                                >
+                                                    <div className="accordion-body card-body">
+
+                                                        {/* rows like Hostinger */}
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Managed hosting for WordPress</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Free 7-day Horizons trial</div>
+                                                            <div className="feature-col">–</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Hostinger Website Builder</div>
+                                                            <div className="feature-col">–</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Managed hosting for WordPress</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Free 7-day Horizons trial</div>
+                                                            <div className="feature-col">–</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Hostinger Website Builder</div>
+                                                            <div className="feature-col">–</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Managed hosting for WordPress</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Free 7-day Horizons trial</div>
+                                                            <div className="feature-col">–</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Hostinger Website Builder</div>
+                                                            <div className="feature-col">–</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        {/* add more rows as needed */}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* item 2 – another section example */}
+                                            <div className="accordion-item card">
+                                                <h2 className="accordion-header card-header" id="heading-security">
+                                                    <button
+                                                        className="accordion-button collapsed"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#collapse-security"
+                                                        aria-expanded="false"
+                                                        aria-controls="collapse-security"
+                                                    >
+                                                        <span className="accordion-title">Security</span>
+                                                    </button>
+                                                </h2>
+                                                <div
+                                                    id="collapse-security"
+                                                    className="accordion-collapse collapse"
+                                                    aria-labelledby="heading-security"
+                                                    data-bs-parent="#compareAccordion"
+                                                >
+                                                    <div className="accordion-body card-body">
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Unlimited free SSL</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+
+                                                        <div className="compare-row">
+                                                            <div className="feature-label">Weekly backups</div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                            <div className="feature-col"><i className="fa fa-check"></i></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* add more accordion items if you need */}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
 
                         <div className="rainbow-testimonial-area rainbow-section-gap">
                             <div className="container">
@@ -2022,8 +2217,8 @@ const Hosting = () => {
                                                         </div>
                                                     </a>
                                                 </div>
-                          
-                          
+
+
                                             </div>
                                             <div className="col-lg-4 col-md-6 col-12 mt--30 sal-animate" data-sal="slide-up" data-sal-duration="700">
                                                 <div className="rainbow-box-card active card-style-default testimonial-style-defalt has-bg-shaped">
