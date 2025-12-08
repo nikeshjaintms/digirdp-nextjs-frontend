@@ -90,14 +90,12 @@ const Header = () => {
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/cloud_vps`)
             .then((res) => {
-                setVpsPlans(res.data);
+                setVpsMenu(res.data[0])
+                set_Vps(res.data[1]);
 
-                const uniqueTabs = [
-                    ...new Map(res.data.map(item => [item.menu_item_name, item])).values()
-                ];
-                setVpsMenu(uniqueTabs);
-
-                if (uniqueTabs.length > 0) setActiveVpsTab(uniqueTabs[0].menu_item_name);
+                if (res.data[0].length > 0) {
+                    setActiveVpsTab(res.data[0][0].menu_item_name); // Set the first tab as active initially
+                }
             })
             .catch(err => console.error("VPS fetch error:", err));
     }, []);
@@ -799,8 +797,8 @@ const Header = () => {
                                                                         className={`tab-pane-new ${activeVpsTab === tab.menu_item_name ? "active" : ""}`}
                                                                     >
                                                                         <div className="row">
-                                                                            {vpsPlans
-                                                                                .filter(vps => vps.menu_item_name === tab.menu_item_name)
+                                                                            {v_p_s
+                                                                                .filter(vps => vps.menu_item_category_id === tab.menu_item_id)
                                                                                 .filter(vps => vps.show_in_header === 1)
                                                                                 .map((vps, idx) => (
                                                                                     <div key={idx} className="col-lg-4">
